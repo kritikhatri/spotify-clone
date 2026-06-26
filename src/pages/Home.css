@@ -1,0 +1,286 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+/* Sticky top navigation */
+.home-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.header-nav-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--text-subdued);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: color 0.2s ease, opacity 0.2s;
+}
+
+.arrow-btn:hover {
+  color: var(--text-base);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.premium-badge {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: transform 0.2s ease;
+}
+
+.premium-badge:hover {
+  transform: scale(1.04);
+}
+
+.user-profile-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #2b2b2b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.user-profile-badge:hover {
+  transform: scale(1.05);
+}
+
+/* Hero elements */
+.home-hero {
+  padding: 16px 32px;
+}
+
+.greeting-text {
+  font-family: var(--font-family-display);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.pill-btn {
+  background-color: var(--bg-elevated);
+  color: var(--text-base);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pill-btn:hover {
+  background-color: var(--bg-elevated-hover);
+}
+
+.pill-btn.active {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Quick Grid Layout (2x3 cards) */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.quick-card {
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.quick-card:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: var(--quick-glow-color, 0 4px 15px rgba(0, 0, 0, 0.35));
+}
+
+.quick-card-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.quick-card-details {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.quick-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-base);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 75%;
+}
+
+.quick-play-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--spotify-green);
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+}
+
+.quick-play-btn:hover {
+  background-color: var(--spotify-green-hover);
+  transform: scale(1.05) !important;
+}
+
+.quick-card:hover .quick-play-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quick-play-btn.playing {
+  opacity: 1;
+  transform: translateY(0);
+  background-color: #ffffff;
+}
+
+/* Rows styling */
+.home-content-rows {
+  padding: 0 32px 60px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Artists Circle Grid */
+.artists-section {
+  margin-top: 16px;
+}
+
+.artists-container {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.artists-container.expanded {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+.artist-card {
+  flex: 0 0 160px;
+  width: 160px;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.artist-card:hover {
+  background-color: var(--bg-surface-hover);
+  transform: translateY(-4px);
+}
+
+.artist-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  margin-bottom: 12px;
+}
+
+.artist-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-card h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-base);
+  margin: 0 0 6px 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.artist-card p {
+  font-size: 0.75rem;
+  color: var(--text-subdued);
+  margin: 0;
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+  .home-header {
+    padding: 0 16px;
+  }
+  .home-hero {
+    padding: 16px;
+  }
+  .home-content-rows {
+    padding: 0 16px 40px 16px;
+  }
+}

@@ -1,0 +1,15 @@
+.navbar {
+  padding: 20px;
+}
+
+.navbar input {
+  width: 400px;
+
+  padding: 12px;
+
+  border: none;
+  border-radius: 30px;
+
+  background: #242424;
+  color: white;
+}

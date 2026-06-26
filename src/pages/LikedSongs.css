@@ -1,0 +1,226 @@
+.liked-songs-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.liked-header-nav {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* Header Banner customizations */
+.liked-banner-badge {
+  width: 150px;
+  height: 150px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #450af5 0%, #c4efd9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.banner-heart-icon {
+  font-size: 4.5rem;
+}
+
+.liked-banner-details {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+.banner-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.banner-title {
+  font-family: var(--font-family-display);
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.banner-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.user-name {
+  font-weight: 700;
+}
+
+.song-count {
+  color: var(--text-subdued);
+}
+
+/* Body and play button actions */
+.liked-body {
+  padding: 24px 32px 60px 32px;
+  background: linear-gradient(180deg, rgba(80, 56, 160, 0.15) 0%, #121212 250px);
+  flex: 1;
+}
+
+.liked-actions {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.banner-play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--spotify-green);
+  color: black;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.banner-play-btn:hover {
+  transform: scale(1.05);
+  background-color: var(--spotify-green-hover);
+}
+
+.banner-play-btn:active {
+  transform: scale(0.95);
+}
+
+/* Number swapping play/pause icons */
+.row-number-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
+}
+
+.row-play-btn {
+  display: none;
+  font-size: 0.75rem;
+  color: white;
+  background: transparent;
+  border: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.track-row:hover .row-index {
+  display: none;
+}
+
+.track-row:hover .row-play-btn {
+  display: flex;
+}
+
+/* Active playing states */
+.track-row.active .row-index {
+  color: var(--spotify-green);
+  font-weight: 600;
+}
+
+.row-title-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.row-song-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.row-text-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.row-duration-details {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+/* Empty State Styling */
+.empty-liked-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-subdued);
+}
+
+.empty-liked-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid var(--text-subdued);
+  color: var(--text-subdued);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+.empty-liked-state h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.empty-liked-state p {
+  font-size: 0.85rem;
+  max-width: 380px;
+  line-height: 1.5;
+}
+
+/* Responsiveness overrides */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 2.5rem;
+  }
+  .liked-banner-badge {
+    width: 100px;
+    height: 100px;
+  }
+  .banner-heart-icon {
+    font-size: 3rem;
+  }
+  .liked-body {
+    padding: 16px;
+  }
+}

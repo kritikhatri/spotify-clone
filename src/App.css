@@ -1,0 +1,153 @@
+/* Main App Grid Layout matching Spotify's modern look */
+.app-container.authenticated-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr auto;
+  grid-template-rows: calc(100vh - 106px) 90px;
+  height: 100vh;
+  background-color: transparent;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  padding: 12px;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.app-container.login-layout {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  background-color: #060608;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+
+/* Dynamic Ambient Backdrop container */
+.ambient-backdrop-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #050508;
+  pointer-events: none;
+}
+
+.ambient-glow-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.28;
+  mix-blend-mode: screen;
+  transition: background-color 1.8s cubic-bezier(0.19, 1, 0.22, 1), transform 12s ease-in-out;
+  pointer-events: none;
+}
+
+.circle-1 {
+  width: 55vw;
+  height: 55vw;
+  top: -10vw;
+  right: -5vw;
+  animation: moveCircle1 22s ease-in-out infinite alternate;
+}
+
+.circle-2 {
+  width: 45vw;
+  height: 45vw;
+  bottom: -5vw;
+  left: -5vw;
+  animation: moveCircle2 28s ease-in-out infinite alternate;
+}
+
+.circle-3 {
+  width: 40vw;
+  height: 40vw;
+  top: 35%;
+  left: 30%;
+  animation: moveCircle3 25s ease-in-out infinite alternate;
+}
+
+@keyframes moveCircle1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-6vw, 10vw) scale(1.15); }
+}
+
+@keyframes moveCircle2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(10vw, -8vw) scale(1.1); }
+}
+
+@keyframes moveCircle3 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-8vw, -8vw) scale(1.18); }
+}
+
+/* Scrollbars styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Main Content Area (Glassmorphic Pane) */
+.main-content {
+  background: var(--bg-glass);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--glow-strength);
+  transition: background 0.5s ease-out;
+  z-index: 1;
+}
+
+/* Page containers inside main content */
+.page-container {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/* Utility layout helper */
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+/* Responsive queries */
+@media (max-width: 900px) {
+  .app-container.authenticated-layout {
+    grid-template-columns: 80px 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-container.authenticated-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: calc(100vh - 170px) 80px 90px; /* main, bottom nav, player */
+  }
+}

@@ -1,0 +1,254 @@
+.library-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.library-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.library-create-btn-body {
+  background-color: transparent;
+  color: var(--text-base);
+  border: 1px solid var(--text-subdued);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.1s;
+}
+
+.library-create-btn-body:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: scale(1.03);
+}
+
+.library-create-btn:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: scale(1.03);
+}
+
+.library-page-body {
+  padding: 16px 32px 60px 32px;
+  flex: 1;
+}
+
+.library-page-title {
+  font-family: var(--font-family-display);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.library-filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.library-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.library-pill-btn {
+  background-color: var(--bg-elevated);
+  color: var(--text-base);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.library-pill-btn:hover {
+  background-color: var(--bg-elevated-hover);
+}
+
+.library-pill-btn.active {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.library-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.lib-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-subdued);
+  font-size: 1rem;
+}
+
+.lib-search-input {
+  background-color: #1f1f1f;
+  border: none;
+  height: 36px;
+  border-radius: 4px;
+  padding: 0 12px 0 36px;
+  color: white;
+  font-size: 0.85rem;
+  outline: none;
+  width: 220px;
+  transition: width 0.2s, background-color 0.2s;
+}
+
+.lib-search-input:focus {
+  width: 260px;
+  background-color: #2a2a2a;
+}
+
+/* Grid layout */
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
+}
+
+.library-card-item {
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.library-card-item:hover {
+  background-color: var(--bg-surface-hover);
+  transform: translateY(-4px);
+}
+
+.library-card-cover-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Liked songs purple gradient cover replacement */
+.library-card-cover-wrapper.liked-gradient {
+  background: linear-gradient(135deg, #450af5 0%, #c4efd9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.library-card-cover-wrapper.liked-gradient .library-card-cover {
+  opacity: 0.2;
+}
+
+.library-card-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.library-card-play-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--spotify-green);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s, background-color 0.2s;
+}
+
+.library-card-play-btn:hover {
+  background-color: var(--spotify-green-hover);
+  transform: scale(1.05) !important;
+}
+
+.library-card-item:hover .library-card-play-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.library-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.library-card-name {
+  color: var(--text-base);
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+}
+
+.library-card-type {
+  color: var(--text-subdued);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Circular Artist card differences */
+.artist-card-item .library-card-cover-wrapper {
+  border-radius: 50%;
+}
+
+.artist-card-item .library-card-play-btn {
+  right: calc(50% - 22px);
+  bottom: calc(50% - 22px);
+}
+
+/* Empty states */
+.library-empty-results {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-subdued);
+}
+
+.library-empty-results h2 {
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.library-empty-results p {
+  font-size: 0.85rem;
+}
+
+/* Responsive splits */
+@media (max-width: 900px) {
+  .library-page-header {
+    padding: 0 16px;
+  }
+  .library-page-body {
+    padding: 16px;
+  }
+}

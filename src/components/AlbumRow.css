@@ -1,0 +1,59 @@
+.album-row {
+  margin-top: 35px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.section-header span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #b3b3b3;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.section-header span:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.songs-container {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.songs-container.expanded {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+.songs-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.songs-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.songs-container::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+.songs-container::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
