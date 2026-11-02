@@ -6,7 +6,7 @@ import { FaPlay, FaPause, FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import SongCard from "../components/SongCard";
 import Header from "../components/Header";
-import "./Search.css";c
+import "./Search.css";
 
 const Search = () => {
   const { playSong, playPause, currentSong, isPlaying, likedSongs, toggleLikeSong } = useContext(AudioContext);
