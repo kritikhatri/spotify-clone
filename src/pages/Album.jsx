@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AudioContext } from "../context/AudioContext";
 
-import { FaPlay, FaPause, FaClock, FaHeart } from "react-icons/fa";
+import { FaPlay, FaPause, FaClock } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import Header from "../components/Header";
 import "./Album.css";

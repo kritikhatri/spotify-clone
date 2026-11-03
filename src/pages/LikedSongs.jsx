@@ -1,14 +1,11 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { AudioContext } from "../context/AudioContext";
 import { FaPlay, FaPause, FaClock, FaHeart } from "react-icons/fa";
-import { FiHeart } from "react-icons/fi";
 import Header from "../components/Header";
 import "./LikedSongs.css";
 
 const LikedSongs = () => {
   const { likedSongs, playSong, playPause, currentSong, isPlaying, toggleLikeSong } = useContext(AudioContext);
-  const navigate = useNavigate();
 
   const handlePlayLikedSongs = () => {
     if (likedSongs.length === 0) return;

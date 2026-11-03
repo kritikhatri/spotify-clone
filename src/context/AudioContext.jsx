@@ -1,7 +1,23 @@
-import React, { createContext, useState, useEffect, useRef } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 import { songs as defaultSongs, albums as defaultAlbums } from "../data/song";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AudioContext = createContext();
+
+const getRandomThemeColor = () => {
+  const colors = [
+    "rgba(26, 115, 232, 0.8)",
+    "rgba(220, 53, 69, 0.8)",
+    "rgba(111, 66, 193, 0.8)",
+    "rgba(253, 126, 20, 0.8)",
+    "rgba(40, 167, 69, 0.8)",
+    "rgba(232, 62, 140, 0.8)",
+    "rgba(32, 201, 151, 0.8)",
+    "rgba(255, 255, 255, 0.15)",
+    "rgba(23, 162, 184, 0.8)"
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
 
 export const AudioProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() => {
@@ -147,6 +163,7 @@ export const AudioProvider = ({ children }) => {
   const [songIndex, setSongIndex] = useState(0);
 
   const audioRef = useRef(new Audio());
+  const handleSongEndedRef = useRef(null);
 
   // Fetch a startup mix of Taylor Swift and Hindi music when authenticated
   useEffect(() => {
@@ -162,7 +179,7 @@ export const AudioProvider = ({ children }) => {
     const fetchStartupMusic = async () => {
       try {
         const artistsToFetch = ["Taylor Swift", "Arijit Singh", "Pritam", "A.R. Rahman"];
-        const fetchPromises = artistsToFetch.map((artist, idx) =>
+        const fetchPromises = artistsToFetch.map((artist) =>
           fetch(
             `https://itunes.apple.com/search?term=${encodeURIComponent(artist)}&media=music&limit=6`
           )
@@ -212,12 +229,9 @@ export const AudioProvider = ({ children }) => {
 
           // Populate Bollywood & Hollywood playlists from fetched tracks
           const bollywoodSongs = allTracks.filter(
-            (t) =>
-              t.artist === "Arijit Singh" ||
-              t.artist === "Pritam" ||
-              t.artist === "A.R. Rahman"
+            (t) => ["Arijit Singh", "Pritam", "A.R. Rahman"].some((name) => t.artist.includes(name))
           );
-          const hollywoodSongs = allTracks.filter((t) => t.artist === "Taylor Swift");
+          const hollywoodSongs = allTracks.filter((t) => t.artist.includes("Taylor Swift"));
 
           setPlaylists((prev) => {
             let filtered = prev.filter(
@@ -286,21 +300,6 @@ export const AudioProvider = ({ children }) => {
     fetchStartupMusic();
   }, [isAuthenticated]);
 
-  const getRandomThemeColor = () => {
-    const colors = [
-      "rgba(26, 115, 232, 0.8)",
-      "rgba(220, 53, 69, 0.8)",
-      "rgba(111, 66, 193, 0.8)",
-      "rgba(253, 126, 20, 0.8)",
-      "rgba(40, 167, 69, 0.8)",
-      "rgba(232, 62, 140, 0.8)",
-      "rgba(32, 201, 151, 0.8)",
-      "rgba(255, 255, 255, 0.15)",
-      "rgba(23, 162, 184, 0.8)"
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
-
   // Mount/Unmount single Audio event listeners
   useEffect(() => {
     const audio = audioRef.current;
@@ -313,8 +312,9 @@ export const AudioProvider = ({ children }) => {
       setCurrentTime(audio.currentTime || 0);
     };
 
+    // Go through a ref so the listener always sees the latest queue and repeat mode
     const handleEnded = () => {
-      handleSongEnded();
+      handleSongEndedRef.current?.();
     };
 
     audio.addEventListener("loadedmetadata", setAudioData);
@@ -385,18 +385,6 @@ export const AudioProvider = ({ children }) => {
     audioRef.current.volume = volume;
     audioRef.current.muted = isMuted;
   }, [volume, isMuted]);
-
-  // Handler for song ending
-  const handleSongEnded = () => {
-    if (isRepeat === "one") {
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(() => {});
-      }
-    } else {
-      nextSong();
-    }
-  };
 
   // Play a specific song and optionally update the queue context
   const playSong = (song, newQueue = null) => {
@@ -480,9 +468,13 @@ export const AudioProvider = ({ children }) => {
   const nextSong = () => {
     if (queue.length === 0) return;
 
-    let nextIdx = songIndex;
+    let nextIdx;
     if (isShuffle) {
       nextIdx = Math.floor(Math.random() * queue.length);
+      // Avoid replaying the same song when there is something else to pick
+      if (nextIdx === songIndex && queue.length > 1) {
+        nextIdx = (nextIdx + 1) % queue.length;
+      }
     } else {
       nextIdx = songIndex + 1;
       if (nextIdx >= queue.length) {
@@ -500,6 +492,22 @@ export const AudioProvider = ({ children }) => {
     setCurrentSong(queue[nextIdx]);
     setIsPlaying(true);
   };
+
+  // Handler for song ending
+  const handleSongEnded = () => {
+    if (isRepeat === "one") {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(() => {});
+      }
+    } else {
+      nextSong();
+    }
+  };
+
+  useEffect(() => {
+    handleSongEndedRef.current = handleSongEnded;
+  });
 
   const prevSong = () => {
     if (!audioRef.current || queue.length === 0) return;

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AudioContext } from "../context/AudioContext";
 import { FaPlay, FaPause, FaClock, FaTrash } from "react-icons/fa";

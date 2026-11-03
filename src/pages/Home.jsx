@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AudioContext } from "../context/AudioContext";
 import { artists as defaultArtists } from "../data/song";
@@ -9,16 +9,14 @@ import "./Home.css";
 
 const Home = () => {
   const { songs, albums, playSong, playArtistSongs, currentSong, isPlaying, playPause } = useContext(AudioContext);
-  const [greeting, setGreeting] = useState("Good evening");
+  const [greeting] = useState(() => {
+    const hrs = new Date().getHours();
+    if (hrs < 12) return "Good morning";
+    if (hrs < 18) return "Good afternoon";
+    return "Good evening";
+  });
   const [activeFilter, setActiveFilter] = useState("All");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const hrs = new Date().getHours();
-    if (hrs < 12) setGreeting("Good morning");
-    else if (hrs < 18) setGreeting("Good afternoon");
-    else setGreeting("Good evening");
-  }, []);
 
   const quickMixItems = albums.slice(0, 6);
 

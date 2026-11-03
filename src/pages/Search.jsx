@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext, useRef } from "react";
 import { AudioContext } from "../context/AudioContext";
 import { searchCategories } from "../data/song";
 import { FaPlay, FaPause, FaHeart } from "react-icons/fa";
@@ -13,7 +12,6 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const searchTimeoutRef = useRef(null);
 
   const formatDuration = (ms) => {
@@ -36,6 +34,7 @@ const Search = () => {
     }
 
     setIsLoading(true);
+    let cancelled = false;
 
     searchTimeoutRef.current = setTimeout(async () => {
       try {
@@ -43,6 +42,8 @@ const Search = () => {
           `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&limit=25`
         );
         const data = await res.json();
+        // Ignore responses for a query the user has already changed
+        if (cancelled) return;
         
         if (data.results) {
           const playableTracks = data.results.filter((track) => track.previewUrl);
@@ -67,19 +68,15 @@ const Search = () => {
       } catch (err) {
         console.error("iTunes Search API Error:", err);
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
     }, 400);
 
     return () => {
+      cancelled = true;
       if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
     };
   }, [query]);
-
-  const handleClear = () => {
-    setQuery("");
-    setSearchResults([]);
-  };
 
   const handlePlaySearchResult = (e, track) => {
     e.stopPropagation();

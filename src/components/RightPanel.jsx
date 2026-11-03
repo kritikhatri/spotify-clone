@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AudioContext } from "../context/AudioContext";
 import { artists as defaultArtists } from "../data/song";
 import { FiHeart } from "react-icons/fi";

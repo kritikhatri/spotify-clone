@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AudioProvider, AudioContext } from "./context/AudioContext";
 import Home from "./pages/Home.jsx";
@@ -12,6 +12,7 @@ import Login from "./pages/Login.jsx";
 import Sidebar from "./components/Sidebar";
 import Player from "./components/Player";
 import RightPanel from "./components/RightPanel";
+import MobileNav from "./components/MobileNav";
 
 import "./App.css";
 
@@ -65,6 +66,9 @@ function AppContent() {
         isRightPanelOpen={isRightPanelOpen} 
         setIsRightPanelOpen={setIsRightPanelOpen} 
       />
+
+      {/* Bottom Navigation (Phones only) */}
+      <MobileNav />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AudioContext } from "../context/AudioContext";
 import { FaPlay, FaPause } from "react-icons/fa";
 import "./SongCard.css";

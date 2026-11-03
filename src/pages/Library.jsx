@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AudioContext } from "../context/AudioContext";
 import { artists as defaultArtists } from "../data/song";
@@ -9,7 +9,7 @@ import "./Library.css";
 
 const Library = () => {
   const navigate = useNavigate();
-  const { playlists, likedSongs, albums, createPlaylist, playArtistSongs } = useContext(AudioContext);
+  const { playlists, albums, createPlaylist, playArtistSongs } = useContext(AudioContext);
   const [filterType, setFilterType] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 

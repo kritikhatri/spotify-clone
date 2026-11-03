@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AudioContext } from "../context/AudioContext";
 import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AudioContext } from "../context/AudioContext";
 import { FaHome, FaSearch, FaPlus, FaHeart } from "react-icons/fa";

@@ -305,3 +305,27 @@
     flex-grow: 1;
   }
 }
+
+@media (max-width: 600px) {
+  .player {
+    grid-row: 2;
+    height: 72px;
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .player-left {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 8px;
+  }
+  .player-center {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .player-like-btn,
+  .player-scrubber-container,
+  .control-btn.shuffle,
+  .control-btn.repeat {
+    display: none;
+  }
+}
